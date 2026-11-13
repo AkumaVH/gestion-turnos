@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Turnos Médicos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <main class="contenedor">
+        <section class="tarjeta">
+            <h1>Gestión de Turnos Médicos</h1>
+            <p>Ingresá con tu cuenta para continuar.</p>
+
+            <form id="formLogin">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="usuario@correo.com" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingresá tu contraseña" required>
+
+                <button type="submit">Iniciar sesión</button>
+            </form>
+
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+
+            <div class="enlaces">
+                <a href="registro.html">Crear cuenta</a>
+                <a href="recuperar.html">Olvidé mi contraseña</a>
+            </div>
+
+            <details>
+                <summary>Cuentas de prueba</summary>
+                <p>Administrador: <code>admin@turnos.com</code> / <code>AdminTurnos2026!</code></p>
+                <p>Médico: <code>medico@turnos.com</code> / <code>MedicoTurnos2026!</code></p>
+                <p>Paciente: <code>juan.perez@gmail.com</code> / <code>PacienteTurnos2026!</code></p>
+            </details>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

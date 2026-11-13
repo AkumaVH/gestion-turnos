@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificaciones del segundo parcial</title>
+    <style>
+        @page { size: A4; margin: 14mm; }
+        body { font-family: Arial, sans-serif; color: #222; font-size: 12px; line-height: 1.35; }
+        h1 { font-size: 18px; color: #002855; margin: 0 0 8px; }
+        h2 { font-size: 14px; color: #002855; margin: 12px 0 4px; }
+        p, li { margin: 0 0 4px; }
+        img { width: 100%; border: 1px solid #ddd; margin-top: 4px; }
+        .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Modificaciones — Gestión de turnos médicos</h1>
+    <p><strong>Integrantes:</strong> Lima Ivan.</p>
+    <p><strong>Repositorio:</strong> <a href="https://github.com/AkumaVH/gestion-turnos">https://github.com/AkumaVH/gestion-turnos</a></p>
+
+    <h2>Validaciones incorporadas</h2>
+    <ul>
+        <li>La fecha y la hora tienen que caer dentro del horario del centro (lunes a viernes de 8:00 a 20:00, sábados de 8:00 a 14:00, domingo cerrado) y no pueden ser anteriores al momento actual. Se considera la duración de la práctica.</li>
+        <li>No se permite superponer turnos del mismo médico, del mismo equipo ni del mismo paciente. Un turno cancelado libera el horario.</li>
+        <li>También se controla que el médico pueda hacer la práctica, que el equipo sea compatible, que un turno nuevo quede Reservado y que no se pueda modificar uno cancelado.</li>
+    </ul>
+
+    <h2>Perfiles y mejora funcional</h2>
+    <p>Hay tres perfiles: administrador, médico y paciente. El token JWT protege la API y cada rol solo ve sus pantallas y sus datos. El médico no puede reservar ni confirmar. El paciente solo gestiona sus turnos.</p>
+    <p>La mejora es la gestión del turno de punta a punta: reservar, confirmar, reprogramar (si estaba confirmado vuelve a Reservado) y cancelar, más filtros por fecha, estado, paciente y médico.</p>
+
+    <h2>Archivos principales</h2>
+    <p>Backend: <code>server.js</code>, <code>routes/</code>, <code>controllers/</code>, <code>services/turnoService.js</code>, <code>middlewares/</code>. Base: <code>database/gestion_turnos.sql</code> y <code>database/migracion.sql</code>. Frontend: <code>frontend/index.html</code>, <code>frontend/pages/dashboard.html</code>, <code>frontend/js/</code> y <code>frontend/css/estilos.css</code>.</p>
+
+    <h2>Capturas</h2>
+    <div class="fila">
+        <div>
+            <p>Listado y acciones según el estado.</p>
+            <img src="capturas/turnos-lista.png" alt="Listado de turnos">
+        </div>
+        <div>
+            <p>El domingo se rechaza. El filtro muestra el turno reservado.</p>
+            <img src="capturas/error-domingo.png" alt="Error de domingo">
+            <img src="capturas/filtro-fecha.png" alt="Filtro por fecha">
+        </div>
+    </div>
+</body>
+</html>

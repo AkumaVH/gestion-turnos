@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel | Gestión de Turnos</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h2>Gestión de Turnos</h2>
+            <p id="rolUsuario">Cargando...</p>
+            <nav>
+                <button type="button" data-seccion="inicio" class="activo">Inicio</button>
+                <button type="button" data-seccion="turnos">Turnos</button>
+                <button type="button" data-seccion="nuevo" id="menuNuevo">Nuevo turno</button>
+                <button type="button" id="cerrarSesion">Cerrar sesión</button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="encabezado">
+                <h1 id="titulo">Panel principal</h1>
+                <p id="datosUsuario">Cargando usuario...</p>
+            </header>
+
+            <section id="seccion-inicio">
+                <div class="panel">
+                    <h2>Qué puede hacer este perfil</h2>
+                    <p id="textoRol"></p>
+                    <h2>Reglas para asignar un turno</h2>
+                    <ul class="reglas">
+                        <li>Lunes a viernes de 8:00 a 20:00. Sábados de 8:00 a 14:00. Domingos cerrado.</li>
+                        <li>No se asignan turnos en una fecha u hora ya pasada.</li>
+                        <li>El médico tiene que estar disponible y poder hacer esa práctica.</li>
+                        <li>El equipo tiene que ser compatible con la práctica.</li>
+                        <li>Ni el médico, ni el equipo, ni el paciente pueden tener otro turno superpuesto. Un turno cancelado libera el horario.</li>
+                        <li>Si se cambia la fecha o la hora de un turno confirmado, vuelve a Reservado.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="seccion-turnos" hidden>
+                <form id="formFiltros" class="filtros">
+                    <div>
+                        <label for="filtroFecha">Fecha</label>
+                        <input type="date" id="filtroFecha">
+                    </div>
+                    <div>
+                        <label for="filtroEstado">Estado</label>
+                        <select id="filtroEstado">
+                            <option value="">Todos</option>
+                            <option>Reservado</option>
+                            <option>Confirmado</option>
+                            <option>Cancelado</option>
+                        </select>
+                    </div>
+                    <div id="filtroPacienteWrap">
+                        <label for="filtroPaciente">Paciente</label>
+                        <select id="filtroPaciente">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div id="filtroMedicoWrap">
+                        <label for="filtroMedico">Médico</label>
+                        <select id="filtroMedico">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="fila-botones">
+                        <button type="submit">Buscar</button>
+                        <button type="button" class="secundario" id="limpiarFiltros">Limpiar</button>
+                    </div>
+                </form>
+
+                <form id="formReprogramar" class="panel" hidden>
+                    <h2>Reprogramar turno <span id="reproId"></span></h2>
+                    <p>Si el turno estaba confirmado, vuelve a Reservado.</p>
+                    <label for="reproFecha">Nueva fecha</label>
+                    <input type="date" id="reproFecha" required>
+                    <label for="reproHora">Nueva hora</label>
+                    <input type="time" id="reproHora" required>
+                    <div class="fila-botones">
+                        <button type="submit">Guardar cambio</button>
+                        <button type="button" class="secundario" id="cerrarRepro">Volver</button>
+                    </div>
+                </form>
+
+                <p id="mensajeTurnos" class="mensaje" role="status"></p>
+                <div class="tabla-contenedor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+                                <th>Práctica</th>
+                                <th>Médico</th>
+                                <th>Equipo</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTurnos"></tbody>
+                    </table>
+                    <p id="vacioTurnos" class="vacio" hidden>No hay turnos con esos filtros.</p>
+                </div>
+            </section>
+
+            <section id="seccion-nuevo" hidden>
+                <form id="formNuevo" class="panel">
+                    <h2>Nuevo turno</h2>
+                    <div id="pacienteNuevoWrap">
+                        <label for="pacienteNuevo">Paciente</label>
+                        <select id="pacienteNuevo" required></select>
+                    </div>
+                    <label for="practicaNuevo">Práctica</label>
+                    <select id="practicaNuevo" required></select>
+                    <label for="medicoNuevo">Médico</label>
+                    <select id="medicoNuevo" required></select>
+                    <label for="equipoNuevo">Equipo</label>
+                    <select id="equipoNuevo" required></select>
+                    <label for="fechaNuevo">Fecha</label>
+                    <input type="date" id="fechaNuevo" required>
+                    <label for="horaNuevo">Hora</label>
+                    <input type="time" id="horaNuevo" required>
+                    <label for="medioNuevo">Medio de solicitud</label>
+                    <select id="medioNuevo" required>
+                        <option value="">Seleccionar</option>
+                        <option>Teléfono</option>
+                        <option>Correo electrónico</option>
+                    </select>
+                    <button type="submit">Reservar turno</button>
+                </form>
+                <p id="mensajeNuevo" class="mensaje" role="status"></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

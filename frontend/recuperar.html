@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña | Gestión de Turnos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <main class="contenedor">
+        <section class="tarjeta">
+            <h1>Recuperar contraseña</h1>
+            <p>Te enviamos un enlace temporal si el correo está registrado.</p>
+
+            <form id="formRecuperar">
+                <label for="email">Correo electrónico</label>
+                <input id="email" type="email" required>
+                <button type="submit">Enviar enlace</button>
+            </form>
+
+            <p id="mensaje" class="mensaje" role="status"></p>
+            <p class="ayuda"><a href="index.html">Volver al inicio de sesión</a></p>
+        </section>
+    </main>
+    <script src="js/api.js"></script>
+    <script src="js/recuperar.js"></script>
+</body>
+</html>
