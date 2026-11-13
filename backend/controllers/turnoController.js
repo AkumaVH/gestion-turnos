@@ -1,3 +1,5 @@
+// Según Trabajo Práctico: controller + capa de servicio
+// Ampliación 2° parcial: filtros, reprogramar, confirmar y cancelar
 const asyncHandler = require('../utils/asyncHandler');
 const turnoService = require('../services/turnoService');
 const { enteroPositivo } = require('../utils/fechas');
@@ -13,6 +15,9 @@ function idDeRuta(req) {
     return id;
 }
 
+// ==============================
+// OBTENER TODOS LOS TURNOS
+// ==============================
 const obtenerTurnos = asyncHandler(async (req, res) => {
     const turnos = await turnoService.listar({
         fecha: req.query.fecha || '',
@@ -24,11 +29,17 @@ const obtenerTurnos = asyncHandler(async (req, res) => {
     res.json(turnos);
 });
 
+// ==============================
+// OBTENER UN TURNO POR ID
+// ==============================
 const obtenerTurnoPorId = asyncHandler(async (req, res) => {
     const turno = await turnoService.obtenerPorId(idDeRuta(req), req.usuario);
     res.json(turno);
 });
 
+// ==============================
+// CREAR TURNO
+// ==============================
 const crearTurno = asyncHandler(async (req, res) => {
     const turno = await turnoService.crear(req.body, req.usuario);
 
@@ -39,6 +50,9 @@ const crearTurno = asyncHandler(async (req, res) => {
     });
 });
 
+// ==============================
+// REPROGRAMAR TURNO (parcial)
+// ==============================
 const actualizarTurno = asyncHandler(async (req, res) => {
     const turno = await turnoService.reprogramar(idDeRuta(req), req.body, req.usuario);
 
@@ -48,6 +62,9 @@ const actualizarTurno = asyncHandler(async (req, res) => {
     });
 });
 
+// ==============================
+// CONFIRMAR TURNO (parcial)
+// ==============================
 const confirmarTurno = asyncHandler(async (req, res) => {
     const turno = await turnoService.confirmar(idDeRuta(req), req.usuario);
 
@@ -57,6 +74,9 @@ const confirmarTurno = asyncHandler(async (req, res) => {
     });
 });
 
+// ==============================
+// CANCELAR TURNO (parcial)
+// ==============================
 const cancelarTurno = asyncHandler(async (req, res) => {
     const turno = await turnoService.cancelar(idDeRuta(req), req.usuario);
 
@@ -66,6 +86,9 @@ const cancelarTurno = asyncHandler(async (req, res) => {
     });
 });
 
+// ==============================
+// EXPORTAR CONTROLADORES
+// ==============================
 module.exports = {
     obtenerTurnos,
     obtenerTurnoPorId,

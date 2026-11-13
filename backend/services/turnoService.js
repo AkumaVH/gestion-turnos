@@ -1,3 +1,6 @@
+// Capa de servicio (Trabajo Práctico).
+// Ampliación 2° parcial: validaciones de agenda, roles en listados y
+// operaciones confirmar / reprogramar / cancelar.
 const db = require('../config/database');
 const AppError = require('../utils/AppError');
 const {
